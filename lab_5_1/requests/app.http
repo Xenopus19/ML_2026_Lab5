@@ -1,0 +1,31 @@
+@baseUrl = http://localhost:8000
+
+### Submit an Iris prediction task
+# @name submitPrediction
+POST {{baseUrl}}/predict
+Content-Type: application/json
+
+{
+  "sepal_length": 5.1,
+  "sepal_width": 3.5,
+  "petal_length": 1.4,
+  "petal_width": 0.2
+}
+
+### Get the submitted task's status and prediction
+# Run after submitPrediction. Repeat if the task is still queued or processing.
+GET {{baseUrl}}/result/ebddbf9a-61ae-46bb-98c5-89a5a866ed55
+
+### Check the response for an unknown task ID
+GET {{baseUrl}}/result/unknown-task-id
+
+### Verify invalid feature values are rejected (expected HTTP 422)
+POST {{baseUrl}}/predict
+Content-Type: application/json
+
+{
+  "sepal_length": 5.1,
+  "sepal_width": 3.5,
+  "petal_length": 1.4,
+  "petal_width": 0
+}
