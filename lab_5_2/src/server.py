@@ -51,6 +51,41 @@ async def add_new_author(name: str, nationality: str = None) -> str:
 
         return f"Successfully added author '{new_author.name}' with ID {new_author.author_id}."
 
+@mcp.tool()
+async def add_new_book(title: str, published_year: int = None) -> str:
+    """
+    Adds a new book to the library database.
+    Always use this tool after ensuring the author exists.
+    """
+    async for session in get_session():
+        new_book = Book( title=title, published_year=published_year)
+        session.add(new_book)
+        await session.commit()
+        await session.refresh(new_book)  # Refreshes to get the new book_id
+
+        return f"Successfully added book '{new_book.title}' with ID {new_book.book_id}."
+
+@mcp.tool()
+async def link_book_to_author(book_id: int, author_id: int) -> str:
+    """
+    Links an existing book to an existing author in the library database.
+    Always use this tool after both the book and author exist.
+    """
+    async for session in get_session():
+        book = await session.get(Book, book_id)
+        author = await session.get(Author, author_id)
+
+        if not book:
+            return f"No book found with ID {book_id}."
+        if not author:
+            return f"No author found with ID {author_id}."
+
+        await session.refresh(book, ["authors"])
+        book.authors.append(author)
+        await session.commit()
+
+        return f"Successfully linked book '{book.title}' (ID {book.book_id}) to author '{author.name}' (ID {author.author_id})."
+
 
 # ---------------------------------------------------------------------------
 # Run the Server

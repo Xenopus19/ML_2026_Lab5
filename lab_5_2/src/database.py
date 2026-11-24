@@ -37,14 +37,14 @@ class Book(SQLModel, table=True):
 
 # The connection string using the asyncpg driver and port 5433
 # This line of code is for external Docker communication with Docker and external instance (here is a reassigned port)
-# DATABASE_URL = URL.create(
-#     drivername="postgresql+asyncpg",
-#     username="mcp_user",
-#     password="M&1_V3r^_C9#pLeX_P@$s",  # SQLAlchemy will safely encode the # and $ symbols
-#     host="localhost",          # <- different instance name
-#     port=5433,                 # <- different port
-#     database="mcp_database"
-# )
+#DATABASE_URL = URL.create(
+#    drivername="postgresql+asyncpg",
+#    username="mcp_user",
+#    password="M&1_V3r^_C9#pLeX_P@$s",  # SQLAlchemy will safely encode the # and $ symbols
+#    host="localhost",          # <- different instance name
+#    port=5433,                 # <- different port
+#    database="mcp_database"
+#)
 
 # This line of code is for internal Docker communication between Docker containers
 DATABASE_URL = URL.create(

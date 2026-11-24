@@ -81,6 +81,7 @@
    ![Restarting the server](./src_readme/4_restarting_the_server.png)
 7. Now you can open the [Your Chatbot](http://localhost:8501/) page and communicate with your agentic chatbot.
    ![Running MCP server locally](./src_readme/5_running_MCP_locally.png)
+   The chatbot can search books, add authors and books, and link an existing book to an author by ID.
 8. `TODO 3`: Try to use other providers (but you probably will need API key). I recommend try with TogetherAI, 
    they give 1$ credits (which is a lot for this lab). 
    Or you can configure your Anthropic API or Google Vertex AI API, Open AI also valid.
